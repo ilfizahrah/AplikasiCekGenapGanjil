@@ -1,3 +1,5 @@
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -26,21 +28,174 @@ public class CekGenapGanjilFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        txtAngka = new javax.swing.JTextField();
+        txtHasil = new javax.swing.JTextField();
+        btnKlik = new javax.swing.JButton();
+        btnKeluar = new javax.swing.JButton();
+        txtHapus = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setLayout(new java.awt.GridLayout());
+
+        jLabel1.setText("Masukkan Angka :");
+
+        txtAngka.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtAngkaFocusGained(evt);
+            }
+        });
+        txtAngka.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAngkaKeyTyped(evt);
+            }
+        });
+
+        txtHasil.setEditable(false);
+
+        btnKlik.setText("Klik Disini");
+        btnKlik.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKlikActionPerformed(evt);
+            }
+        });
+
+        btnKeluar.setText("Keluar");
+        btnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKeluarActionPerformed(evt);
+            }
+        });
+
+        txtHapus.setText("Hapus");
+        txtHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtHapusActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtHapus)
+                .addGap(60, 60, 60)
+                .addComponent(btnKeluar)
+                .addGap(55, 55, 55))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(70, 70, 70)
+                                .addComponent(txtAngka, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addComponent(txtHasil, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(240, 240, 240)
+                        .addComponent(btnKlik)))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtAngka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(64, 64, 64)
+                .addComponent(btnKlik)
+                .addGap(40, 40, 40)
+                .addComponent(txtHasil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnKeluar)
+                    .addComponent(txtHapus))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnKlikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKlikActionPerformed
+        String inputText = txtAngka.getText();
+    
+    // Cek apakah input kosong
+    if (inputText.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Harap masukkan angka", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    try {
+        int angka = Integer.parseInt(inputText); // Ubah teks menjadi angka
+
+        String hasilGenapGanjil;
+                if (angka % 2 == 0) {
+            hasilGenapGanjil = "Genap";
+                } else {
+            hasilGenapGanjil = "Ganjil";
+                }
+
+        
+        // Cek Bilangan Prima
+       String hasilPrima;
+                if (isPrima(angka)) {
+            hasilPrima = "Bilangan Prima";
+                } else {
+            hasilPrima = "Bukan Bilangan Prima";
+                }
+
+        
+        // Tampilkan hasil
+        txtHasil.setText("Angka " + angka + " adalah " + hasilGenapGanjil + " dan " + hasilPrima + ".");
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Input tidak valid! Harap masukkan angka.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}    
+
+// Metode untuk mengecek apakah suatu angka adalah bilangan prima
+private boolean isPrima(int angka) {
+    if (angka <= 1) {
+        return false; // Bilangan kurang dari atau sama dengan 1 bukan bilangan prima
+    }
+    for (int i = 2; i <= Math.sqrt(angka); i++) {
+        if (angka % i == 0) {
+            return false; // Jika habis dibagi, maka bukan bilangan prima
+        }
+    }
+    return true; // Jika tidak ada faktor lain, maka bilangan prima
+    }//GEN-LAST:event_btnKlikActionPerformed
+
+    private void txtAngkaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAngkaKeyTyped
+         char c = evt.getKeyChar();
+    if (!Character.isDigit(c)) {
+        evt.consume(); // Abaikan karakter non-angka
+    }
+    }//GEN-LAST:event_txtAngkaKeyTyped
+
+    private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
+            System.exit(0);
+    }//GEN-LAST:event_btnKeluarActionPerformed
+
+    private void txtHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHapusActionPerformed
+         txtAngka.setText("");
+        txtHasil.setText("");
+        txtAngka.requestFocus();
+    }//GEN-LAST:event_txtHapusActionPerformed
+
+    private void txtAngkaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAngkaFocusGained
+         txtAngka.setText(""); // Membersihkan teks di JTextField
+    }//GEN-LAST:event_txtAngkaFocusGained
 
     /**
      * @param args the command line arguments
@@ -78,5 +233,12 @@ public class CekGenapGanjilFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnKeluar;
+    private javax.swing.JButton btnKlik;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField txtAngka;
+    private javax.swing.JButton txtHapus;
+    private javax.swing.JTextField txtHasil;
     // End of variables declaration//GEN-END:variables
 }
